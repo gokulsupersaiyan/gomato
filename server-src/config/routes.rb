@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :order_details
+  resources :dishes
+  resources :open_hours
   resources :hotels
   resources :dish_types
   resources :users

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  from_week_day: 1
+  to_week_day: 1
+  from_hour_of_day: 2018-07-04 11:01:58
+  to_hour_of_day: 2018-07-04 11:01:58
+
+two:
+  from_week_day: 1
+  to_week_day: 1
+  from_hour_of_day: 2018-07-04 11:01:58
+  to_hour_of_day: 2018-07-04 11:01:58
