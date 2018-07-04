@@ -1,11 +1,6 @@
 class DishTypesController < ApplicationController
   before_action :set_dish_type, only: [:show, :update, :destroy]
 
-  def initialize
-    puts 'init'
-  end
-
-
   def index
     @dish_types = DishType.all
 
@@ -45,6 +40,6 @@ class DishTypesController < ApplicationController
   end
 
   def dish_type_params
-    params.fetch(:dish_type, {})
+    params.require(:dish_type).permit(:dish_type)
   end
 end

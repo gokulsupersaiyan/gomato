@@ -13,14 +13,14 @@
 ActiveRecord::Schema.define(version: 2018_07_04_063929) do
 
   create_table "dish_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
+    t.string "dish_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_dish_types_on_name"
+    t.index ["dish_type"], name: "index_dish_types_on_dish_type"
   end
 
   create_table "dishes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
+    t.string "dish_name"
     t.text "description"
     t.text "picture_url"
     t.bigint "hotel_id", null: false
@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(version: 2018_07_04_063929) do
     t.integer "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dish_name"], name: "index_dishes_on_dish_name"
     t.index ["dish_type_id"], name: "fk_rails_51aec8c948"
     t.index ["hotel_id"], name: "fk_rails_b85da45fcd"
-    t.index ["name"], name: "index_dishes_on_name"
   end
 
   create_table "hotels", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
