@@ -1,0 +1,12 @@
+version: '3.0'
+
+services:
+  mysql57:
+    image: mysql:5.7 #https://hub.docker.com/r/library/mysql/tags/
+    network_mode: "bridge"
+    command: --sql_mode="NO_ENGINE_SUBSTITUTION" #https://github.com/docker-library/mysql/issues/149
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    container_name: gomato-mysql
