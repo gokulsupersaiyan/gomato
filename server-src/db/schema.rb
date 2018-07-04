@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_04_060311) do
+ActiveRecord::Schema.define(version: 2018_07_04_063929) do
 
   create_table "dish_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -81,6 +81,21 @@ ActiveRecord::Schema.define(version: 2018_07_04_060311) do
     t.index ["order_detail_id"], name: "fk_rails_3b55c4b4f3"
   end
 
+  create_table "ratings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "starts"
+    t.text "review"
+    t.integer "upvotes"
+    t.integer "downvotes"
+    t.text "reply_from_hotel"
+    t.bigint "hotel_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_ratings_on_created_at"
+    t.index ["hotel_id"], name: "fk_rails_526461a96a"
+    t.index ["user_id"], name: "fk_rails_a7dfeb9f5f"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
@@ -100,4 +115,6 @@ ActiveRecord::Schema.define(version: 2018_07_04_060311) do
   add_foreign_key "order_details", "users", on_delete: :cascade
   add_foreign_key "ordered_items", "dishes", on_delete: :cascade
   add_foreign_key "ordered_items", "order_details", on_delete: :cascade
+  add_foreign_key "ratings", "hotels"
+  add_foreign_key "ratings", "users"
 end

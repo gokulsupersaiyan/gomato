@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  starts: 1
+  review: MyText
+  upvotes: 1
+  downvotes: 1
+  reply_from_hotel: MyText
+
+two:
+  starts: 1
+  review: MyText
+  upvotes: 1
+  downvotes: 1
+  reply_from_hotel: MyText
