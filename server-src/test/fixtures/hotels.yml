@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  address: MyString
+  avg_price_for_person: 1
+  min_order: 1
+  is_closed_for_now: false
+  contact_number: MyString
+  is_verified: false
+
+two:
+  name: MyString
+  address: MyString
+  avg_price_for_person: 1
+  min_order: 1
+  is_closed_for_now: false
+  contact_number: MyString
+  is_verified: false
