@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :ordered_items
   resources :order_details
   resources :dishes
   resources :open_hours

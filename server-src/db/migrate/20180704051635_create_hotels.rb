@@ -12,5 +12,10 @@ class CreateHotels < ActiveRecord::Migration[5.2]
       t.decimal :longitude, precision: 15, scale: 10
       t.timestamps
     end
+
+    add_index :hotels, :name
+    add_index :hotels, :is_closed_for_now
+    add_index :hotels, :is_verified
+
   end
 end

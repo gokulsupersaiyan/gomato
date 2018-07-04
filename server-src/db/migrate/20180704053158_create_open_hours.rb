@@ -10,6 +10,5 @@ class CreateOpenHours < ActiveRecord::Migration[5.2]
     end
 
     add_foreign_key :open_hours, :hotels, on_delete: :cascade
-
   end
 end
