@@ -1,7 +1,7 @@
 class Dish < ApplicationRecord
   belongs_to :hotel
   belongs_to :dish_type ,foreign_key: :dish_type_id
-
+  belongs_to :ordered_item
 
   validates :dish_name, :description, :picture_url, :price, presence: true
   validates_numericality_of :price, greater_than: 0

@@ -31,6 +31,9 @@ class HotelsController < ApplicationController
   end
 
   def hotel_params
+    open_hours = params[:hotel][:open_hour]
+    params[:hotel].delete(:open_hour)
+    params[:hotel][:open_hour_attributes] = open_hours
     params[:hotel].permit(:name, :address, :avg_price_for_person, :min_order,
                           :is_closed_for_now, :contact_number, :is_verified,
                           :latitude, :longitude,

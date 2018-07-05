@@ -1,39 +1,29 @@
 class OrderDetailsController < ApplicationController
   before_action :set_order_detail, only: [:show, :update, :destroy]
 
-  # GET /order_details
   def index
-    @order_details = OrderDetail.all
-
-    render json: @order_details
+    if params[:hotel_id]
+      @order_details = OrderDetail.includes(:user).where('hotel_id = ? ', params[:hotel_id])
+      render json: { order_details: @order_details.as_json(include: { user: {}, ordered_items: { include: { dish: {} } } }) }
+    elsif params[:user_id]
+      @order_details = OrderDetail.includes(:hotel).where('user_id  = ? ', params[:user_id])
+      render json: { order_details: @order_details.as_json(include: { hotel: {}, ordered_items: { include: { dish: {} } } }) }
+    end
   end
 
-  # GET /order_details/1
   def show
     render json: @order_detail
   end
 
-  # POST /order_details
   def create
     @order_detail = OrderDetail.new(order_detail_params)
-
-    if @order_detail.save
-      render json: @order_detail, status: :created, location: @order_detail
-    else
-      render json: @order_detail.errors, status: :unprocessable_entity
-    end
+    create_model(@order_detail)
   end
 
-  # PATCH/PUT /order_details/1
   def update
-    if @order_detail.update(order_detail_params)
-      render json: @order_detail
-    else
-      render json: @order_detail.errors, status: :unprocessable_entity
-    end
+    update_model(@order_detail) { @order_detail.update(order_detail_params) }
   end
 
-  # DELETE /order_details/1
   def destroy
     @order_detail.destroy
   end
