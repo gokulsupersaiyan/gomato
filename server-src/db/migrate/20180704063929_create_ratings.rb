@@ -3,8 +3,8 @@ class CreateRatings < ActiveRecord::Migration[5.2]
     create_table :ratings do |t|
       t.integer :starts
       t.text :review
-      t.integer :upvotes
-      t.integer :downvotes
+      t.integer :upvotes, default: 0
+      t.integer :downvotes, default: 0
       t.text :reply_from_hotel
       t.bigint :hotel_id, null: false
       t.bigint :user_id, null: false

@@ -4,29 +4,20 @@ class DishTypesController < ApplicationController
   def index
     @dish_types = DishType.all
 
-    render json: @dish_types
+    render json: { dishes: @dish_types }
   end
 
   def show
-    render json: @dish_type
+    render json: { dish: @dish_type }
   end
 
   def create
     @dish_type = DishType.new(dish_type_params)
-
-    if @dish_type.save
-      render json: @dish_type, status: :created, location: @dish_type
-    else
-      render json: @dish_type.errors, status: :unprocessable_entity
-    end
+    create_model(@dish_type)
   end
 
   def update
-    if @dish_type.update(dish_type_params)
-      render json: @dish_type
-    else
-      render json: @dish_type.errors, status: :unprocessable_entity
-    end
+    update_model(@dish_type) { @dish_type.update(dish_type_params) }
   end
 
   def destroy

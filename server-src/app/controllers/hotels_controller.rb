@@ -1,51 +1,43 @@
 class HotelsController < ApplicationController
-  before_action :set_hotel, only: [:show, :update, :destroy]
+  before_action :set_hotel, only: %i[update destroy]
 
-  # GET /hotels
   def index
-    @hotels = Hotel.all
-
-    render json: @hotels
+    render json: Hotel.filter(params), status: :ok
   end
 
-  # GET /hotels/1
   def show
-    render json: @hotel
+    render json: { hotel: Hotel.find_hotel(params) }, status: :ok
   end
 
-  # POST /hotels
   def create
     @hotel = Hotel.new(hotel_params)
-
-    if @hotel.save
-      render json: @hotel, status: :created, location: @hotel
-    else
-      render json: @hotel.errors, status: :unprocessable_entity
-    end
+    create_model(@hotel) {
+      { hotel: @hotel.as_json(include: { open_hour: {} }) }
+    }
   end
 
-  # PATCH/PUT /hotels/1
   def update
-    if @hotel.update(hotel_params)
-      render json: @hotel
-    else
-      render json: @hotel.errors, status: :unprocessable_entity
-    end
+    update_model(@hotel) { @hotel.update(hotel_params) }
   end
 
-  # DELETE /hotels/1
   def destroy
     @hotel.destroy
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_hotel
-      @hotel = Hotel.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def hotel_params
-      params.require(:hotel).permit(:name, :address, :avg_price_for_person, :min_order, :is_closed_for_now, :contact_number, :is_verified)
-    end
+  def set_hotel
+    @hotel = Hotel.find(params[:id])
+  end
+
+  def hotel_params
+    params[:hotel].permit(:name, :address, :avg_price_for_person, :min_order,
+                          :is_closed_for_now, :contact_number, :is_verified,
+                          :latitude, :longitude,
+                          open_hour_attributes: [:from_week_day, :to_week_day, :from_hour_of_day, :to_hour_of_day])
+  end
+
+  def open_hours
+    params[:hotel][:open_hour].permit(:from_week_day, :to_week_day, :from_hour_of_day, :to_hour_of_day)
+  end
 end

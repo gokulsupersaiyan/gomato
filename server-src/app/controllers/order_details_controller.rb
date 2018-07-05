@@ -39,13 +39,14 @@ class OrderDetailsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_order_detail
-      @order_detail = OrderDetail.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def order_detail_params
-      params.require(:order_detail).permit(:delivery_address)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_order_detail
+    @order_detail = OrderDetail.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def order_detail_params
+    params.require(:order_detail).permit(:delivery_address)
+  end
 end
