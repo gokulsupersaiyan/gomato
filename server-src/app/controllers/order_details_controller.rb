@@ -4,10 +4,10 @@ class OrderDetailsController < ApplicationController
   def index
     if params[:hotel_id]
       @order_details = OrderDetail.includes(:user).where('hotel_id = ? ', params[:hotel_id])
-      render json: { order_details: @order_details.as_json(include: { user: {}, ordered_items: { include: { dish: {} } } }) }
+      render json: { order_details: @order_details.as_json(include: { user: { except: [:updated_at, :created_at] }, ordered_items: { include: { dish: { except: [:updated_at, :created_at] } }, except: [:updated_at, :created_at] } }, except: [:updated_at]) }
     elsif params[:user_id]
       @order_details = OrderDetail.includes(:hotel).where('user_id  = ? ', params[:user_id])
-      render json: { order_details: @order_details.as_json(include: { hotel: {}, ordered_items: { include: { dish: {} } } }) }
+      render json: { order_details: @order_details.as_json(include: { hotel: { except: [:updated_at, :created_at] }, ordered_items: { include: { dish: { except: [:updated_at, :created_at] } }, except: [:updated_at, :created_at] } }, except: [:updated_at]) }
     end
   end
 
