@@ -3,7 +3,6 @@ class OrderDetailsController < ApplicationController
 
   def index
     if params[:hotel_id]
-      puts OrderDetail.includes(:user, :ordered_items, :dishes).where('hotel_id = ? ', params[:hotel_id]).to_sql
       @order_details = OrderDetail.includes(:user, :ordered_items, :dishes).where('hotel_id = ? ', params[:hotel_id])
       render json: { order_details: @order_details.as_json(include: { user: { except: [:updated_at, :created_at] }, ordered_items: { include: { dish: { except: [:updated_at, :created_at] } }, except: [:updated_at, :created_at] } }, except: [:updated_at]) }
     elsif params[:user_id]
