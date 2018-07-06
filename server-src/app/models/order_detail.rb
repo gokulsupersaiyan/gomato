@@ -1,7 +1,6 @@
 class OrderDetail < ApplicationRecord
   has_many :ordered_items
-  has_one :hotel
-  has_one :user
+  has_many :dishes, through: :ordered_items
   belongs_to :user
   belongs_to :hotel
 
