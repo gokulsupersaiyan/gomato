@@ -19,7 +19,7 @@ module UserHelper
   MODIFY_HOTEL = 1
   MODIFY_DISHES = 1 << 1
   MODIFY_ORDERS = 1 << 2
-
+  REPLY_TO_REVIEWS = 1 << 3
 
   # TODO: Add account specific delegation here
   def has_permission(permission)
