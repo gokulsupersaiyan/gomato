@@ -32,7 +32,7 @@ module UserHelper
     roles.reduce(0) { |sum, role| sum | role }
   end
 
-  def add_role(*roles)
+  def add_roles(*roles)
     current_user.roles = current_user.roles | compose_roles(roles)
     current_user.save
   end
