@@ -21,11 +21,25 @@ module UserHelper
   MODIFY_ORDERS = 1 << 2
 
 
-  # TODO: Add account specifc delegation here
-
+  # TODO: Add account specific delegation here
   def has_permission(permission)
     # TODO: change condition here
     true || current_user && current_user.roles & permission > 0
+  end
+
+
+  def compose_roles(*roles)
+    roles.reduce(0) { |sum, role| sum | role }
+  end
+
+  def add_role(*roles)
+    current_user.roles = current_user.roles | compose_roles(roles)
+    current_user.save
+  end
+
+  def remove_roles(*roles)
+    current_user.roles = current_user.roles - (current_user.roles & compose_roles(roles))
+    current_user.save
   end
 
 end
