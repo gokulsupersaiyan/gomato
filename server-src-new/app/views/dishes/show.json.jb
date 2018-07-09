@@ -1,0 +1,4 @@
+json = {
+    dish: render(partial: 'dishes/dish', object: @dish),
+}
+json

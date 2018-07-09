@@ -1,0 +1,8 @@
+{
+    id: dish.id,
+    name: dish.dish_name,
+    picture_url: dish.picture_url,
+    hotel_id: dish.hotel_id,
+    dish_type: dish.dish_type,
+    price: dish.price
+}

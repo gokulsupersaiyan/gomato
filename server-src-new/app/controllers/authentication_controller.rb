@@ -13,7 +13,7 @@ class AuthenticationController < ApplicationController
     if user.errors.messages.empty?
       render json: { status: 'success' }, status: :ok
     else
-      render json: { errors: user.errors.messages }, status: :bad_request
+      render_model_errors(user)
     end
   end
 

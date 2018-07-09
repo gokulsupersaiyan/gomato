@@ -12,7 +12,7 @@ class RatingsController < ApplicationController
     if @rating.save
       render 'show', formats: 'json', handlers: 'jb'
     else
-      render_errors(@hotel)
+      render_model_errors(@hotel)
     end
   end
 
@@ -20,11 +20,12 @@ class RatingsController < ApplicationController
     if @rating.update(rating_params)
       render 'show', formats: 'json', handlers: 'jb'
     else
-      render_errors(@rating)
+      render_model_errors(@rating)
     end
   end
 
   def destroy
+    render_not_authorized if @rating.user_id != current_user_id
     @rating.destroy
   end
 
@@ -33,7 +34,7 @@ class RatingsController < ApplicationController
     if @rating.increment(:up_votes).save
       render 'show', formats: 'json', handlers: 'jb'
     else
-      render_errors(@rating)
+      render_model_errors(@rating)
     end
   end
 
@@ -41,7 +42,7 @@ class RatingsController < ApplicationController
     if @rating.increment(:down_votes).save
       render 'show', formats: 'json', handlers: 'jb'
     else
-      render_errors(@rating)
+      render_model_errors(@rating)
     end
   end
 
@@ -52,7 +53,6 @@ class RatingsController < ApplicationController
   end
 
   def rating_params
-    params.require(:rating).permit(:stars, :review, :reply_from_hotel, :hotel_id, :user_id)
-    #TODO : Get user id from session
+    params.require(:rating).permit(:stars, :review, :reply_from_hotel, :hotel_id).merge(current_user_id)
   end
 end

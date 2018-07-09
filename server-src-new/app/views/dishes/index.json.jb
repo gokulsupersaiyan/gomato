@@ -1,0 +1,4 @@
+json = {
+}
+json[:dishes] = render(partial: 'dishes/dish', collection: @dishes)
+json

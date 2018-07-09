@@ -7,4 +7,7 @@ Rails.application.routes.draw do
   get '/ratings/:id/upvote', to: 'ratings#upvote'
   get '/ratings/:id/downvote', to: 'ratings#downvote'
 
+
+  resources :dishes
+
 end
