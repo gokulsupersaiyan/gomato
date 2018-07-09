@@ -7,15 +7,15 @@ class ApplicationController < ActionController::API
   include UserHelper
 
   def render_model_errors(model)
-    render json: { errors: model.errors }, status: :unprocessable_entity
+    render json: { errors: model.errors }, status: :unprocessable_entity, handlers: 'json'
   end
 
   def render_not_authorized
-    render json: { errors: ['Not Authenticated'] }, status: :unauthorized
+    render json: { errors: ['Not Authenticated'] }, status: :unauthorized, handlers: 'json'
   end
 
   def render_not_found
-    render json: { errors: ['Object Not found'] }, status: :not_found
+    render json: { errors: ['Object Not found'] }, status: :not_found, handlers: 'json'
   end
 
   def authenticate_request!

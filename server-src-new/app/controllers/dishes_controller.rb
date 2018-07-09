@@ -1,7 +1,11 @@
 class DishesController < ApplicationController
-  before_action :set_dish, only: [:show, :update, :destroy]
+
+  include UserHelper
 
   before_action :check_modify_permission, only: [:create, :update, :destroy]
+
+  before_action :set_dish, only: [:show, :update, :destroy]
+
 
   def index
     @dishes = Dish.where('hotel_id = ?', params[:hotel_id])
@@ -9,11 +13,15 @@ class DishesController < ApplicationController
   end
 
   def show
-    render 'dishes/show', formats: 'json', handlers: 'jb', :status => :not_found
+    if @dish.nil?
+      render_not_found
+    else
+      render 'dishes/show', formats: 'json', handlers: 'jb'
+    end
   end
 
   def create
-    @dish = Dish.new(dish_params)
+    @dish = Dish.new(Dish.filter_params(params))
     if @dish.save
       render 'dishes/show', formats: 'json', handlers: 'jb'
     else
@@ -22,7 +30,7 @@ class DishesController < ApplicationController
   end
 
   def update
-    if @dish.update(dish_params)
+    if @dish.update(Dish.filter_params(params))
       render 'dishes/show', formats: 'json', handlers: 'jb'
     else
       render_model_errors(@dish)
@@ -40,12 +48,8 @@ class DishesController < ApplicationController
     render_not_found if @dish.nil?
   end
 
-  def dish_params
-    params.require(:dish).permit(:dish_name, :description, :picture_url, :hotel_id, :dish_type_id, :price)
-  end
-
   def check_modify_permission
-    render_not_authorized unless has_permission(MODIFY_DISHES)
+    render_not_authorized unless has_permission(UserHelper::MODIFY_DISHES)
   end
 
 end

@@ -17,6 +17,7 @@ class RatingsController < ApplicationController
   end
 
   def update
+    render_not_authorized if @rating.user_id != current_user_id
     if @rating.update(rating_params)
       render 'show', formats: 'json', handlers: 'jb'
     else
@@ -44,6 +45,10 @@ class RatingsController < ApplicationController
     else
       render_model_errors(@rating)
     end
+  end
+
+  def update_hotel_review
+    has_permission(UserHelper::MODIFY_HOTEL) unless render_not_authorized
   end
 
   private
