@@ -54,15 +54,16 @@ class RatingsController < ApplicationController
   private
 
   def set_rating
-    @rating = Rating.find(params[:id])
+    @rating = Rating.find_by_id(params[:id])
+    render_not_found if @rating.nil?
   end
 
   def rating_params_for_user
-    params.require(:rating).permit(:stars, :review, :hotel_id).merge(current_user_id)
+    params.permit(:stars, :review, :hotel_id).merge(current_user_id)
   end
 
   def rating_params_for_hotel
-    params.require(:rating).permit(:reply_from_hotel, :hotel_id)
+    params.permit(:reply_from_hotel, :hotel_id)
   end
 
 end
