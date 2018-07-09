@@ -27,7 +27,7 @@ class HotelsController < ApplicationController
     end
   end
 
-  
+
   def destroy
     @hotel.destroy
   end

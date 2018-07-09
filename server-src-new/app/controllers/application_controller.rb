@@ -53,10 +53,6 @@ class ApplicationController < ActionController::API
     http_token && auth_token && auth_token[:user_id].to_i
   end
 
-  def print_json_result(result, meta)
-    render json: { result.table_name => result, meta: meta }, status: :ok
-  end
-
   def current_user_id
     @current_user.id
   end
