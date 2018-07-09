@@ -12,11 +12,13 @@ module UserHelper
   end
 
   def current_user_id
-    Thread.current[:user_id]
+    # TODO : Change condition here
+    Thread.current[:user_id] || 1
   end
 
   MODIFY_HOTEL = 1
   MODIFY_DISHES = 1 << 1
+  MODIFY_ORDERS = 1 << 2
 
 
   # TODO: Add account specifc delegation here

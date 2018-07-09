@@ -18,6 +18,10 @@ class ApplicationController < ActionController::API
     render json: { errors: ['Object Not found'] }, status: :not_found, handlers: 'json'
   end
 
+  def render_bad_request
+    render json: { errors: ['Bad request'] }, status: :bad_request, handlers: 'json'
+  end
+
   def authenticate_request!
     unless user_id_in_token?
       render json: { errors: ['Not Authenticated'] }, status: :unauthorized

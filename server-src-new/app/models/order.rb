@@ -6,6 +6,6 @@ class Order < ApplicationRecord
 
 
   def self.filter_params(params)
-    params[:order].require(:order).permit(:hotel_id, :user_id, :delivery_address, :ordered_items)
+    params[:order].permit(:hotel_id, :user_id, :delivery_address, :ordered_items)
   end
 end

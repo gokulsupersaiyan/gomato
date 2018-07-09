@@ -1,0 +1,7 @@
+{
+    id: order.id,
+    delivery_address: order.delivery_address,
+    hotel_id: order.hotel_id,
+    ordered_items: order.ordered_items,
+    user_id: order.user_id
+}

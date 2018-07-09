@@ -42,15 +42,15 @@ ActiveRecord::Schema.define(version: 2018_07_08_145316) do
     t.index ["name"], name: "index_hotels_on_name"
   end
 
-  create_table "order_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "delivery_address"
     t.bigint "user_id", null: false
     t.bigint "hotel_id", null: false
     t.text "ordered_items", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["hotel_id"], name: "fk_rails_8d58df4c45"
-    t.index ["user_id"], name: "fk_rails_67f58df321"
+    t.index ["hotel_id"], name: "fk_rails_984e113617"
+    t.index ["user_id"], name: "fk_rails_f868b47f6a"
   end
 
   create_table "ratings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -89,8 +89,8 @@ ActiveRecord::Schema.define(version: 2018_07_08_145316) do
   end
 
   add_foreign_key "dishes", "hotels", on_delete: :cascade
-  add_foreign_key "order_details", "hotels", on_delete: :cascade
-  add_foreign_key "order_details", "users", on_delete: :cascade
+  add_foreign_key "orders", "hotels", on_delete: :cascade
+  add_foreign_key "orders", "users", on_delete: :cascade
   add_foreign_key "ratings", "hotels"
   add_foreign_key "ratings", "users"
 end
