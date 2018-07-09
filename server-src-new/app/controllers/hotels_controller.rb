@@ -4,7 +4,7 @@ class HotelsController < ApplicationController
 
   before_action :set_hotel, only: %i[update destroy show]
 
-  before_action :auth_hotel_edit, only: %i[create update destroy]
+  before_action :authorize_hotel_edit, only: %i[create update destroy]
 
   def index
     @hotels = Hotel.all
@@ -32,10 +32,6 @@ class HotelsController < ApplicationController
     end
   end
 
-  def place_order
-
-  end
-
   def destroy
     @hotel.destroy
   end
@@ -47,7 +43,7 @@ class HotelsController < ApplicationController
     render_not_found if @hotel.nil?
   end
 
-  def auth_hotel_edit
+  def authorize_hotel_edit
     render_not_authorized unless has_permission(UserHelper::MODIFY_HOTEL)
   end
 end

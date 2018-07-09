@@ -8,7 +8,7 @@ class RatingsController < ApplicationController
 
 
   def create
-    @rating = Rating.new(rating_params)
+    @rating = Rating.new(rating_params_for_user)
     if @rating.save
       render 'show', formats: 'json', handlers: 'jb'
     else
@@ -18,7 +18,7 @@ class RatingsController < ApplicationController
 
   def update
     render_not_authorized if @rating.user_id != current_user_id
-    if @rating.update(rating_params)
+    if @rating.update(rating_params_for_user)
       render 'show', formats: 'json', handlers: 'jb'
     else
       render_model_errors(@rating)
@@ -57,7 +57,12 @@ class RatingsController < ApplicationController
     @rating = Rating.find(params[:id])
   end
 
-  def rating_params
-    params.require(:rating).permit(:stars, :review, :reply_from_hotel, :hotel_id).merge(current_user_id)
+  def rating_params_for_user
+    params.require(:rating).permit(:stars, :review, :hotel_id).merge(current_user_id)
   end
+
+  def rating_params_for_hotel
+    params.require(:rating).permit(:stars, :review, :hotel_id).merge(current_user_id)
+  end
+
 end
