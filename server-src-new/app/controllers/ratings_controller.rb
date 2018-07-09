@@ -62,7 +62,7 @@ class RatingsController < ApplicationController
   end
 
   def rating_params_for_hotel
-    params.require(:rating).permit(:reply_from_hotel, :hotel_id).merge(current_user_id)
+    params.require(:rating).permit(:reply_from_hotel, :hotel_id)
   end
 
 end
