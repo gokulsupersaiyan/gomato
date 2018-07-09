@@ -1,0 +1,4 @@
+json = {
+    rating: render(partial: 'ratings/rating', object: @rating),
+}
+json

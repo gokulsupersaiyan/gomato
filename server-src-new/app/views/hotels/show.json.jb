@@ -1,0 +1,4 @@
+json = {
+    hotel: render(partial: 'hotels/hotel', object: @hotel),
+}
+json

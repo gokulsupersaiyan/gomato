@@ -1,0 +1,4 @@
+json = {
+}
+json[:hotels] = render(partial: 'hotels/hotel', collection: @hotels)
+json

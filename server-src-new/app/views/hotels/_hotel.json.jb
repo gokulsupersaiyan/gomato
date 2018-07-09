@@ -1,0 +1,14 @@
+{
+    id: hotel.id,
+    name: hotel.name,
+    address: hotel.address,
+    avg_price_for_person: hotel.avg_price_for_person,
+    min_order: hotel.min_order,
+    contact_number: hotel.contact_number,
+    latitude: hotel.latitude,
+    longitude: hotel.longitude,
+    from_hour_of_day: hotel.from_hour_of_day,
+    to_hour_of_day: hotel.to_hour_of_day,
+    from_week_day: hotel.from_week_day,
+    to_week_day: hotel.to_week_day
+}

@@ -1,0 +1,4 @@
+json = {
+}
+json[:ratings] = render(partial: 'ratings/rating', collection: @ratings)
+json
