@@ -5,6 +5,8 @@ class Order < ApplicationRecord
   validates :delivery_address, :ordered_items, presence: true
 
 
+  enum status: [:placed, :processing, :processed, :cancelled, :rejected]
+
   def self.filter_params(params)
     params[:order].permit(:hotel_id, :user_id, :delivery_address, :ordered_items)
   end

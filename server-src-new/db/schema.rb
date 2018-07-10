@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_08_145316) do
+ActiveRecord::Schema.define(version: 2018_07_10_065031) do
 
   create_table "dishes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "dish_name"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2018_07_08_145316) do
     t.text "ordered_items", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status"
     t.index ["hotel_id"], name: "fk_rails_984e113617"
     t.index ["user_id"], name: "fk_rails_f868b47f6a"
   end

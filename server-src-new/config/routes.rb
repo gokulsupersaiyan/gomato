@@ -14,4 +14,6 @@ Rails.application.routes.draw do
 
   resources :orders
 
+  put '/orders/:id/update_status', to: 'orders#update_status'
+
 end

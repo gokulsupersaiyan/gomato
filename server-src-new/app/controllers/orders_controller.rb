@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
 
   include UserHelper
 
-  before_action :set_order, only: %i[update destroy show]
+  before_action :set_order, only: %i[update destroy show update_status]
 
   before_action :authorize_order_edit, only: %i[update destroy show]
 
@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
 
 
   def create
-    @order = Order.new(Order.filter_params(params))
+    @order = Order.new(Order.filter_params(params).merge(status: 1))
     if @order.save
       render 'show', formats: 'json', handlers: 'jb'
     else
@@ -33,6 +33,21 @@ class OrdersController < ApplicationController
 
   def update
     if @order.update(Order.filter_params(params))
+      render 'show', formats: 'json', handlers: 'jb'
+    else
+      render_model_errors(@order)
+    end
+  end
+
+
+  def update_status
+    if params[:order][:status] == 'cancelled'
+      authorize_order_edit
+    else
+      render_not_authorized unless has_permission(UserHelper::MODIFY_ORDERS)
+    end
+
+    if @order.update(status: params[:order][:status])
       render 'show', formats: 'json', handlers: 'jb'
     else
       render_model_errors(@order)
