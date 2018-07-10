@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get '/ratings/:id/downvote', to: 'ratings#downvote'
 
 
+  get '/search', to: 'search#index'
+
   resources :dishes
 
   resources :orders

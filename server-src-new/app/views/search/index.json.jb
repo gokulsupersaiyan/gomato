@@ -1,0 +1,9 @@
+json = {
+}
+json[:hotels] = render(partial: 'hotels/hotel', collection: @hotels)
+json[:dishes] = render(partial: 'dishes/dish', collection: @dishes)
+json[:meta] = {
+    dish_pagination: @dish_pagination,
+    hotel_pagination: @hotel_pagination
+}
+json

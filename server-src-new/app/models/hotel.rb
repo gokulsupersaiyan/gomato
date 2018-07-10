@@ -15,14 +15,15 @@ class Hotel < ApplicationRecord
 
 
   def self.search(params)
+    params[:hotel_page] ||= 1
     hotel = Hotel
     if params[:search]
-      hotel = hotel.where('name LIKE ?', '%' + params[:search] + '%')
-                   .or(Hotel.where(id: Dish.where('dish_name LIKE ?', '%' + params[:search] + '%')))
+      hotel = hotel.where('name LIKE ?', '%' + params[:search] + '%').paginate(page: params[:hotel_page], per_page: 25)
+      # .or(Hotel.where(id: Dish.where('dish_name LIKE ?', '%' + params[:search] + '%')))
     else
-      hotel = hotel.all
+      hotel = hotel.paginate(page: params[:hotel_page], per_page: 25).all
     end
-    hotel
+    [hotel, { page: params[:hotel_page], total_pages: (hotel.count.to_f / 25).ceil }]
   end
 
 end
