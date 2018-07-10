@@ -7,7 +7,7 @@ class HotelsController < ApplicationController
   before_action :authorize_hotel_edit, only: %i[create update destroy]
 
   def index
-    @hotels = Hotel.search(params)
+    @hotels, @pagination = Hotel.search(params)
     render 'index', formats: 'json', handlers: 'jb'
   end
 
