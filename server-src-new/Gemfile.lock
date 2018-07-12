@@ -1,3 +1,14 @@
+GIT
+  remote: git://github.com/elastic/elasticsearch-rails.git
+  revision: 433c0f076ad60b3e793765f715da522dcce7ff18
+  branch: master
+  specs:
+    elasticsearch-model (7.0.0)
+      activesupport (> 3)
+      elasticsearch (> 1)
+      hashie
+    elasticsearch-rails (7.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -57,10 +68,23 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
+    elasticsearch (6.1.0)
+      elasticsearch-api (= 6.1.0)
+      elasticsearch-transport (= 6.1.0)
+    elasticsearch-api (6.1.0)
+      multi_json
+    elasticsearch-transport (6.1.0)
+      faraday
+      multi_json
     erubi (1.7.1)
+    faker (1.8.7)
+      i18n (>= 0.7)
+    faraday (0.15.2)
+      multipart-post (>= 1.2, < 3)
     ffi (1.9.25)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
+    hashie (3.5.7)
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
     jb (0.5.0)
@@ -87,6 +111,7 @@ GEM
     minitest (5.11.3)
     msgpack (1.2.4)
     multi_json (1.13.1)
+    multipart-post (2.0.0)
     mysql2 (0.5.1)
     nio4r (2.3.1)
     nokogiri (1.8.4)
@@ -167,6 +192,10 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   byebug
   devise
+  elasticsearch
+  elasticsearch-model!
+  elasticsearch-rails!
+  faker
   jb
   jbuilder (~> 2.5)
   jwt

@@ -4,7 +4,7 @@ class Order < ApplicationRecord
 
   validates :delivery_address, :ordered_items, presence: true
 
-
+  # TODO : Change to map
   enum status: [:placed, :processing, :processed, :cancelled, :rejected]
 
   def self.filter_params(params)
