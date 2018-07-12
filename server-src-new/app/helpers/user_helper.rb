@@ -12,8 +12,7 @@ module UserHelper
   end
 
   def current_user_id
-    # TODO : Change condition here
-    Thread.current[:user_id] || 1
+    Thread.current[:user_id]
   end
 
   MODIFY_HOTEL = 1
@@ -21,13 +20,10 @@ module UserHelper
   MODIFY_ORDERS = 1 << 2
   REPLY_TO_REVIEWS = 1 << 3
 
-  # TODO: Add account specific delegation here
   def has_permission(permission)
-    # TODO: change condition here
-    true || current_user && current_user.roles & permission > 0
+    current_user && current_user.roles & permission > 0
   end
-
-
+  
   def compose_roles(*roles)
     roles.reduce(0) { |sum, role| sum | role }
   end
