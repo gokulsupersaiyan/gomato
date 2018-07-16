@@ -14,6 +14,10 @@ class ApplicationController < ActionController::API
     render json: { errors: ['Not Authenticated'] }, status: :unauthorized, handlers: 'json'
   end
 
+  def render_permission_denied
+    render json: { errors: ['Permission Denied'] }, status: :forbidden, handlers: 'json'
+  end
+
   def render_not_found
     render json: { errors: ['Object Not found'] }, status: :not_found, handlers: 'json'
   end

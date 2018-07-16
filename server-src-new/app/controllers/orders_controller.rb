@@ -46,7 +46,7 @@ class OrdersController < ApplicationController
     if params[:order][:status] == 'cancelled'
       authorize_order_edit
     else
-      render_not_authorized unless has_permission(UserHelper::MODIFY_ORDERS)
+      render_permission_denied unless has_permission(UserHelper::MODIFY_ORDERS)
     end
 
     if @order.update(status: params[:order][:status])
@@ -67,7 +67,7 @@ class OrdersController < ApplicationController
   private
 
   def authorize_order_edit
-    render_not_authorized unless @order.user_id == current_user_id || has_permission(UserHelper::MODIFY_ORDERS)
+    render_permission_denied unless @order.user_id == current_user_id || has_permission(UserHelper::MODIFY_ORDERS)
   end
 
   def set_order

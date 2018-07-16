@@ -50,7 +50,7 @@ class DishesController < ApplicationController
   end
 
   def check_modify_permission
-    render_not_authorized unless has_permission(UserHelper::MODIFY_DISHES)
+    render_permission_denied unless has_permission(UserHelper::MODIFY_DISHES)
   end
 
 end

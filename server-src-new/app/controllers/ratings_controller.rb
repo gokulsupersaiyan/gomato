@@ -50,7 +50,7 @@ class RatingsController < ApplicationController
   end
 
   def update_hotel_review
-    render_not_authorized unless has_permission(UserHelper::REPLY_TO_REVIEWS)
+    render_permission_denied unless has_permission(UserHelper::REPLY_TO_REVIEWS)
   end
 
   private

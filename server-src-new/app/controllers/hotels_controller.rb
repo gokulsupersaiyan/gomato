@@ -48,6 +48,6 @@ class HotelsController < ApplicationController
   end
 
   def authorize_hotel_edit
-    render_not_authorized unless has_permission(UserHelper::MODIFY_HOTEL)
+    render_permission_denied unless has_permission(UserHelper::MODIFY_HOTEL)
   end
 end
