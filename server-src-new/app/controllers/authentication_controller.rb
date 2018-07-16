@@ -1,6 +1,6 @@
 class AuthenticationController < ApplicationController
   def authenticate_user
-    user = User.find_for_database_authentication(username: params[:username])
+    user = User.find_for_database_authentication(email: params[:email])
     if user.valid_password?(params[:password])
       render json: payload(user)
     else
@@ -9,7 +9,7 @@ class AuthenticationController < ApplicationController
   end
 
   def signup_user
-    user = User.create(params.permit(:email, :password, :password_confirmation, :username))
+    user = User.create(params.permit(:email, :password, :password_confirmation, :address))
     if user.errors.messages.empty?
       render json: { status: 'success' }, status: :ok
     else
@@ -23,7 +23,7 @@ class AuthenticationController < ApplicationController
     return nil unless user && user.id
     {
         auth_token: JsonWebToken.encode(user_id: user.id),
-        user: { id: user.id, email: user.email, username: user.username }
+        user: { id: user.id, email: user.email }
     }
   end
 end
