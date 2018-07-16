@@ -1,6 +1,8 @@
 class RatingsController < ApplicationController
   before_action :set_rating, only: [:update, :destroy, :upvote, :downvote]
 
+  around_action :authenticate_request!, only: %i[create update destroy upvode downvote]
+
   def index
     @ratings = Rating.where('hotel_id = ?', params[:hotel_id]).includes(:user)
     render 'index', formats: 'json', handlers: 'jb'

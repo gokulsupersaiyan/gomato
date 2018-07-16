@@ -6,6 +6,7 @@ class DishesController < ApplicationController
 
   before_action :set_dish, only: [:show, :update, :destroy]
 
+  around_action :authenticate_request!, only: %i[create update destroy]
 
   def index
     @dishes = Dish.where('hotel_id = ?', params[:hotel_id])

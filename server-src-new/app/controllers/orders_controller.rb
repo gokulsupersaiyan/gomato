@@ -6,6 +6,8 @@ class OrdersController < ApplicationController
 
   before_action :authorize_order_edit, only: %i[update destroy show]
 
+  around_action :authenticate_request!, only: %i[create update update_status]
+
 
   def index
     if params[:hotel_id]
