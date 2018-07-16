@@ -16,4 +16,7 @@ Rails.application.routes.draw do
 
   put '/orders/:id/update_status', to: 'orders#update_status'
 
+  post '/login' => 'authentication#authenticate_user'
+  post '/signup' => 'authentication#signup_user'
+
 end
