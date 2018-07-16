@@ -20,12 +20,14 @@ module UserHelper
   MODIFY_ORDERS = 1 << 2
   REPLY_TO_REVIEWS = 1 << 3
 
+  ROLES = [MODIFY_HOTEL, MODIFY_DISHES, MODIFY_ORDERS, REPLY_TO_REVIEWS].freeze
+
   def has_permission(permission)
     current_user && current_user.roles & permission > 0
   end
-  
+
   def compose_roles(*roles)
-    roles.reduce(0) { |sum, role| sum | role }
+    roles.flatten.reduce(0) { |sum, role| sum | role }
   end
 
   def add_roles(*roles)
