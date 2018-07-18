@@ -1,6 +1,6 @@
 describe 'Signup controller', type: 'request' do
   before(:each) do
-    @email = Time.now.to_f.to_s + 'gokulprabhu@gmail.com'
+    @email = "#{Time.now.to_f}gokulprabhu@gmail.com"
     @password = 'Demo@123'
     @address = '42 , Silamba mudhaliyar street'
   end
@@ -24,7 +24,7 @@ describe 'Signup controller', type: 'request' do
 
     post '/signup', params: { email: @email, password: @password, password_confirmation: @password, address: @address }
     expect(response).to have_http_status(:ok)
-    
+
     post '/login', params: { email: @email, password: @password }
     expect(response).to have_http_status(:ok)
 
