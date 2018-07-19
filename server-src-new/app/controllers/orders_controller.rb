@@ -2,11 +2,11 @@ class OrdersController < ApplicationController
 
   include UserHelper
 
-  before_action :set_order, only: %i[update destroy show update_status]
+  around_action :authenticate_request!, only: %i[create update update_status]
 
   before_action :authorize_order_edit, only: %i[update destroy show]
 
-  around_action :authenticate_request!, only: %i[create update update_status]
+  before_action :set_order, only: %i[update destroy show update_status]
 
 
   def index

@@ -1,4 +1,6 @@
 module UserHelper
+  attr :current_user
+
   def current_user=(user)
     Thread.current[:user] = user
   end

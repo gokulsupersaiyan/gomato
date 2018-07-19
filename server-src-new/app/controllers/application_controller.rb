@@ -31,11 +31,11 @@ class ApplicationController < ActionController::API
       render json: { errors: ['Not Authenticated'] }, status: :unauthorized
       return
     end
-    UserHelper.current_user_id = auth_token[:user_id]
+    @current_user_id = auth_token[:user_id]
     yield
-    UserHelper.current_user_id = nil
+    @current_user_id = nil
   rescue JWT::VerificationError, JWT::DecodeError
-    UserHelper.current_user_id = nil
+    @current_user_id = nil
     render json: { errors: ['Not Authenticated'] }, status: :unauthorized
   end
 
